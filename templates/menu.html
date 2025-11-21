@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="restaurant-menu-header-section">
+    <h2>Speisekarte</h2>
+    <p>Wähle deine Gerichte und füge sie dem Warenkorb hinzu.</p>
+</section>
+<section class="restaurant-menu-section">
+    {% for category in categories %}
+    <section class="restaurant-menu-category">
+        <h3>{{ category.name }}</h3>
+        <div class="restaurant-menu-grid">
+            {% for item in category.items %}
+            <article class="restaurant-menu-card">
+                <div class="restaurant-menu-card-header">
+                    <h4>{{ item.name }}</h4>
+                    <span class="restaurant-menu-price">{{ "%.2f"|format(item.price) }} €</span>
+                </div>
+                {% if item.description %}
+                <p class="restaurant-menu-description">{{ item.description }}</p>
+                {% endif %}
+                <form action="{{ url_for('cart_add') }}" method="post" class="restaurant-menu-form">
+                    <input type="hidden" name="menu_item_id" value="{{ item.id }}">
+                    <label class="restaurant-menu-quantity-label">
+                        Menge
+                        <input type="number" name="quantity" value="1" min="1" class="restaurant-menu-quantity-input">
+                    </label>
+                    <button type="submit" class="restaurant-primary-button">In den Warenkorb</button>
+                </form>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+</section>
+{% endblock %}

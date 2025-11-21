@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="restaurant-success-section">
+    <h2>Vielen Dank für deine Bestellung</h2>
+    <p>Deine Bestellnummer lautet {{ order_id }}.</p>
+    <p>Die Küche beginnt sofort mit der Zubereitung.</p>
+    <a href="{{ url_for('menu') }}" class="restaurant-primary-button">Weiter bestellen</a>
+</section>
+{% endblock %}

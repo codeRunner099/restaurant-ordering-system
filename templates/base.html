@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Restaurant Sonnenteller</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <section class="restaurant-page-container">
+        <header class="restaurant-header">
+            <div class="restaurant-header-branding">
+                <div class="restaurant-logo-circle">S</div>
+                <div class="restaurant-brand-text">
+                    <h1>Restaurant Sonnenteller</h1>
+                    <p>Digitale Speisekarte und Bestellsystem</p>
+                </div>
+            </div>
+            <nav class="restaurant-main-nav">
+                <a href="{{ url_for('index') }}">Start</a>
+                <a href="{{ url_for('menu') }}">Speisekarte</a>
+                <a href="{{ url_for('cart_view') }}">Warenkorb ({{ cart_quantity if cart_quantity is defined else 0 }})</a>
+                <a href="{{ url_for('admin_orders') }}">Küche</a>
+            </nav>
+        </header>
+        <main class="restaurant-main-content">
+            {% block content %}{% endblock %}
+        </main>
+        <footer class="restaurant-footer">
+            <p>Restaurant Sonnenteller · Musterstraße 1 · 12345 Musterstadt</p>
+        </footer>
+    </section>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="restaurant-admin-section">
+    <h2>Bestellungen für die Küche</h2>
+    {% if orders|length == 0 %}
+    <p>Es liegen aktuell keine Bestellungen vor.</p>
+    {% else %}
+    <table class="restaurant-admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Zeitpunkt</th>
+                <th>Gast</th>
+                <th>Tisch</th>
+                <th>Status</th>
+                <th>Summe</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created_at }}</td>
+                <td>{{ order.customer_name }}</td>
+                <td>{{ order.table_number }}</td>
+                <td>{{ order.status }}</td>
+                <td>{{ "%.2f"|format(order.total_amount) }} €</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</section>
+{% endblock %}
